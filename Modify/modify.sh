@@ -119,6 +119,14 @@ sed_recursive () {
     cd ..
 }
 
+usage () {    # function which prints the information about the script if -h is envoked, or an error
+
+  echo -e "\n**************************** HELP ****************************\n\nThe script 'modify' is dedicated to lowerizing, uppercasing file names or modifying them using the sed command.\nChanges may be done either with recursion or without it."
+  echo -e "\nOptions:\n\t-r\t\tenvokes recursion\n\t-l|-u\t\tlowercase or uppercase\n\t<sed pattern>\tsed pattern\n\t-h\t\tshows help\n"
+  echo -e "Syntax options:\n\tmodify.sh [-l|-u] <file name>\n\tmodify.sh [-r] [-l|-u] <directory name>\n\tmodify.sh [-rl|-lr|-ru|-ur] <directory name>\n\tmodify.sh <sed pattern> <file name>\n\tmodify.sh [-r] <sed pattern> <directory name>\n\tmodify.sh [-h]\n"    
+
+}
+
 
 # ////////////////////////////////////////////////////////////// MAIN PART //////////////////////////////////////////////////////////////
 
@@ -126,7 +134,8 @@ sed_recursive () {
 # checking if there are any flags - if not, exit
 if [ -z $1 ]
 then
-  echo "There are no flags specified to the command."
+  echo -e "There are no flags specified to the command.\n"
+  usage
   exit
 fi
 
@@ -148,7 +157,7 @@ do
 
   if [ -h = $i ]  # -h, no variable here - not needed
   then
-    echo -e "The script 'modify' is dedicated to lowerizing (-l) file names, uppercasing (-u) file names,\nor internally calling sed command with the given sed pattern which will operate on file names.\nChanges may be done either with recursion (-r) or without it."
+    usage
     exit
   fi
 
@@ -179,6 +188,12 @@ do
     recursive=1
   fi
 
+  if [ -lu = $i ] || [ -ul = $i ]   # -lu or -ul (PROHIBITED, later checked)
+  then
+    lowercase=1
+    uppercase=1
+  fi
+
   if [[ $i = */*/*/* ]]   # sed pattern
   then 
     is_sed=1
@@ -198,7 +213,8 @@ if [ $recursive = 1 ]
 then
   if [ "$#" -gt 3 ]
   then
-    echo "Error: Too many parameters provided (>3)."
+    echo -e "Error: Too many parameters provided (>3).\n"
+    usage
     exit
   fi
 fi
@@ -206,7 +222,8 @@ if [ $recursive = 0 ]
   then
   if [ "$#" -gt 2 ]
   then
-    echo "Error: Too many parameters provided (>2)."
+    echo -e "Error: Too many parameters provided (>2).\n"
+    usage
     exit
   fi
 fi
@@ -214,14 +231,16 @@ fi
 # checking if provided file/directory exists
 if [ ! -d "$name" ] && [ ! -f "$name" ]
 then
-  echo "Error: This file/directory does not exist."
+  echo -n "Error: This file/directory does not exist.\n"
+  usage
   exit
 fi
 
 # checking if the variables uppercase and lowercase are not both set to 1 - they cannot be
 if [ $uppercase = 1 ] && [ $lowercase = 1 ]
 then
-  echo "Error: Not possible to both lowerize and uppercase file names."
+  echo -e "Error: Not possible to both lowerize and uppercase file names.\n"
+  usage
   exit
 fi
 
@@ -230,7 +249,8 @@ if [ $is_sed = 1 ]
 then
   if [ $uppercase = 1 ] || [ $lowercase = 1 ]
   then
-    echo "Error: Not possible to use -l or -u option with the sed pattern."
+    echo -e "Error: Not possible to use -l or -u option with the sed pattern.\n"
+    usage
     exit
   fi
 fi
@@ -245,7 +265,8 @@ then
 
       if [ ! -d $name ]   # when recursive, a whole directory name must be given
         then
-          echo "Error: Not a directory."
+          echo -e "Error: Not a directory.\n"
+          usage
           exit
       fi
 
@@ -255,7 +276,8 @@ then
 
     if [ ! -f $name ]   # when not recursive, a file name must be given
     then
-      echo "Error: Not a file."
+      echo -e "Error: Not a file.\n"
+      usage
       exit
     fi
 
@@ -284,7 +306,8 @@ then
 
       if [ ! -d $name ]   # when recursive, a whole directory name must be given
         then
-          echo "Error: not a directory."
+          echo -e "Error: not a directory.\n"
+          usage
           exit
       fi
 
@@ -294,7 +317,8 @@ then
 
     if [ ! -f $name ]   # when not recursive, a file name must be given
     then
-      echo "Error: Not a file."
+      echo -e "Error: Not a file.\n"
+      usage
       exit
     fi
     
@@ -303,7 +327,7 @@ then
     if [ $name = $only_name ]   # checking whether the file name doesn't have an extension and 'rename' command can be used without further transformations
     then
       rename 'y/A-Z/a-z/' $name
-      
+
     else
       # the file has an extension, so we have to make sure to uppercase only the part without the extension (only_name variable)
       only_name=${only_name,,}
@@ -323,7 +347,8 @@ then
     then
         if [ ! -d $name ]   # when recursive, a whole directory name must be given
         then
-          echo "Error: not a directory."
+          echo -e "Error: not a directory.\n"
+          usage
           exit
         fi
 
@@ -334,7 +359,8 @@ then
 
       if [ ! -f $name ]   # when not recursive, a file name must be given
       then
-        echo "Error: Not a file."
+        echo -e "Error: Not a file.\n"
+        usage
         exit
       fi
 
