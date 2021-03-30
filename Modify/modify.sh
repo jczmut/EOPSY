@@ -122,7 +122,7 @@ usage () {    # function which prints the information about the script if -h is 
 
   echo -e "\n**************************** HELP ****************************\n\nThe script 'modify' is dedicated to lowerizing, uppercasing file names or modifying them using the sed command.\nChanges may be done either with recursion or without it."
   echo -e "\nOptions:\n\t-r\t\tenvokes recursion\n\t-l|-u\t\tlowercase or uppercase\n\t<sed pattern>\tsed pattern\n\t-h\t\tshows help\n"
-  echo -e "Syntax options:\n\tmodify.sh [-l|-u] <file name>\n\tmodify.sh [-r] [-l|-u] <directory name>\n\tmodify.sh [-rl|-lr|-ru|-ur] <directory name>\n\tmodify.sh <sed pattern> <file name>\n\tmodify.sh [-r] <sed pattern> <directory name>\n\tmodify.sh [-h]\n"    
+  echo -e "Syntax options:\n\tmodify.sh [-l|-u] <file names ...>\n\tmodify.sh [-r] [-l|-u] <directory names ...>\n\tmodify.sh [-rl|-lr|-ru|-ur] <directory names ...>\n\tmodify.sh <sed pattern> <file names ...>\n\tmodify.sh [-r] <sed pattern> <directory names ...>\n\tmodify.sh [-h]\n"    
 
 }
 

@@ -46,7 +46,7 @@ echo "Press any key to continue."
 read pause
 
 echo "__________________________________________________ TEST 2 __________________________________________________"
-echo -e "\n./modify.sh -u LIST.txt ~/Music_test/Muse/SURVIVAL.mp3"
+echo -e "\n./modify.sh -l LIST.txt ~/Music_test/Muse/SURVIVAL.mp3"
 
 ../modify.sh -l LIST.txt /home/$USER/Music_test/Muse/SURVIVAL.mp3
 
@@ -88,7 +88,7 @@ read pause
 echo "__________________________________________________ TEST 6 __________________________________________________"
 echo -e "\n./modify.sh -ru TheSmiths JohnFrusciante"
 
-../modify.sh -r -ru TheSmiths JohnFrusciante
+../modify.sh -ru TheSmiths JohnFrusciante
 
 echo -e "\n........................................ Directories after TEST 6 ........................................"
 ls -R
