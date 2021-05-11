@@ -4,7 +4,8 @@ Operating Systems projects (6th semester)
 ----------------------------------------------
 Task 1: Modify
 
-The script 'modify' is dedicated to lowerizing, uppercasing file names or modifying them using the sed command.
-Changes may be done either with recursion or without it.
-        
-The script 'modify_examples' creates a test directory and performs a series of tests presenting the functionalities of the 'modify' script
+Task 2: Processes and Signals
+
+Task 3: Scheduling
+
+Task 4: Memory Management
