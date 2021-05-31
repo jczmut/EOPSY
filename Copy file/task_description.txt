@@ -1,3 +1,4 @@
+____________ Task 6 description ____________
 
   Operations on files, mmap() and getopt()
 
