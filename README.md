@@ -13,3 +13,5 @@ Task 4: Memory Management
 Task 5: Dining Philosophers
 
 Task 6: Copy file
+
+Task 7: Dining Philosophers (with threads)
